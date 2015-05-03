@@ -75,6 +75,10 @@ public class MainActivity extends Activity {
             ci.title = "PonyPony";
             ci.description = "Horse!";
             ci.icon = R.drawable.noun_image;
+            ci.fullText = "AY WHATS UP MY FELLOW COMPUTER PROGRAMMERS HOW ARE YOU DOING ON THIS FINE DAY" +
+                    "THIS IS JUST SOME TEST TEXT AND I DONT REALLY FEEL LIKE GETTING THE WHOLE LATIN THING" +
+                    "BECAUSE I'M LAZY OR SOMETHING HOPEFULLY THIS IS A GOOD ENOUGH LENGTH TO TEST A TEXTVIEW" +
+                    " HOLA";
 
             result.add(ci);
 

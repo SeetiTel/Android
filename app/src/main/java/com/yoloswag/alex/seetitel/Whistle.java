@@ -12,5 +12,9 @@ public class Whistle {
     protected int icon;
     protected String title;
     protected String description;
+    protected String dataType;
+    protected String imageURL;
+    protected String audioURL;
+    protected String fullText;
 
 }
