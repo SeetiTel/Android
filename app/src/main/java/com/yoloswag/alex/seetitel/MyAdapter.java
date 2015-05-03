@@ -65,13 +65,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
                 i = new Intent(v.getContext(), TextActivity.class);
                 i.putExtra("ID", (whistles.get(getPosition())).id);
                 i.putExtra("FULL_TEXT", (whistles.get(getPosition())).description);
+                i.putExtra("TIME", (whistles.get(getPosition())).timestamp);
             }
             else if ((whistles.get(getPosition())).dataType.equals("IMAGE")) {
                 i = new Intent(v.getContext(), ImageActivity.class);
                 i.putExtra("ID", (whistles.get(getPosition())).id);
+                i.putExtra("TIME", (whistles.get(getPosition())).timestamp);
+
             } else if ((whistles.get(getPosition())).dataType.equals("AUDIO")) {
                 i = new Intent(v.getContext(), AudioActivity.class);
                 i.putExtra("ID", (whistles.get(getPosition())).id);
+                i.putExtra("TIME", (whistles.get(getPosition())).timestamp);
+
             }
             if (i != null) {
                 v.getContext().startActivity(i);

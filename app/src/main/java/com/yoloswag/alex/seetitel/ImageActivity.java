@@ -39,6 +39,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Alex on 5/2/15.
@@ -76,12 +78,16 @@ public class ImageActivity extends Activity {
         wv.getSettings().setBuiltInZoomControls(true);
 
         id = getIntent().getExtras().getInt("ID");
-
         populateWebView(urlBase + id);
 
+        long timestamp_sec = getIntent().getExtras().getLong("TIME");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM hh:mm");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp_sec);
+
         ActionBar ab = getActionBar();
-        ab.setTitle("Image");
-        ab.setSubtitle("An image whistle");
+        ab.setTitle(formatter.format(calendar.getTime()) + "Z");
 
         ab.setDisplayHomeAsUpEnabled(true);
     }

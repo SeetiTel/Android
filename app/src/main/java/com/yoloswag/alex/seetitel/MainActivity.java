@@ -81,8 +81,7 @@ public class MainActivity extends Activity {
         //noinspection SimplifiableIfStatement
            if (id == R.id.refresh) {
                populateWhistles(urlBase);
-//            Toast.makeText(getApplicationContext(), "refresh...", Toast.LENGTH_LONG).show();
-            return true;
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

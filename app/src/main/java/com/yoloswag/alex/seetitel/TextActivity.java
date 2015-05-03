@@ -20,7 +20,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -49,12 +51,18 @@ public class TextActivity extends Activity {
         id = getIntent().getExtras().getInt("ID");
         String description = (getIntent().getExtras().getString("FULL_TEXT"));
         populateTextView(urlBase + id);
+
+        long timestamp_sec = getIntent().getExtras().getLong("TIME");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM hh:mm");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp_sec);
+
         ActionBar ab = getActionBar();
+        ab.setTitle(formatter.format(calendar.getTime()) + "Z");
 
-        ab.setTitle("Text");
-        ab.setSubtitle(description);
-
-        ab.setDisplayHomeAsUpEnabled(true);    }
+        ab.setDisplayHomeAsUpEnabled(true);
+    }
 
     private void populateTextView(String Url) {
 

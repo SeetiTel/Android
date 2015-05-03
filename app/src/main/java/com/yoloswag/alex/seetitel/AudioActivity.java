@@ -27,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Alex on 5/3/15.
@@ -216,9 +218,14 @@ public class AudioActivity extends Activity implements View.OnClickListener, Vie
 
         populateAudio(base + id);
 
+        long timestamp_sec = getIntent().getExtras().getLong("TIME");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM hh:mm");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp_sec);
+
         ActionBar ab = getActionBar();
-        ab.setTitle("Audio");
-        ab.setSubtitle("An audio whistle");
+        ab.setTitle(formatter.format(calendar.getTime()) + "Z");
 
         ab.setDisplayHomeAsUpEnabled(true);
 
