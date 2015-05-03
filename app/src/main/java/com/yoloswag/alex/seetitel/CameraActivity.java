@@ -5,9 +5,11 @@ package com.yoloswag.alex.seetitel;
  */
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -48,6 +50,12 @@ public class CameraActivity extends Activity {
         // These two lines are not needed
 
         btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
+
+
+        ActionBar ab = getActionBar();
+        ab.setTitle("Camera Upload");
+
+        ab.setDisplayHomeAsUpEnabled(true);
 
         /**
          * Capture image button click event

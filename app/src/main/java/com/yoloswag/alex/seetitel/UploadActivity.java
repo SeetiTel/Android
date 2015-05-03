@@ -5,6 +5,8 @@ package com.yoloswag.alex.seetitel;
  */
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,6 +18,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -74,6 +77,11 @@ public class UploadActivity extends Activity {
             Toast.makeText(getApplicationContext(),
                     "Sorry, file path is missing!", Toast.LENGTH_LONG).show();
         }
+
+        ActionBar ab = getActionBar();
+        ab.setTitle("Camera Upload");
+
+        ab.setDisplayHomeAsUpEnabled(true);
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
 
@@ -172,7 +180,7 @@ public class UploadActivity extends Activity {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == 200 || statusCode == 201) {
                     // Server response
-                    responseString = EntityUtils.toString(r_entity);
+                    //responseString = EntityUtils.toString(r_entity);
                 } else {
                     responseString = "Error occurred! Http Status Code: "
                             + statusCode;
@@ -193,7 +201,7 @@ public class UploadActivity extends Activity {
             Log.e(TAG, "Response from server: " + result);
 
             // showing the server response in an alert dialog
-            showAlert(result);
+            showAlert("Image upload successful!");
 
             super.onPostExecute(result);
         }
