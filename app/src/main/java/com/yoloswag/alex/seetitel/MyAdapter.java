@@ -64,7 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
             }
             else if ((whistles.get(getPosition())).dataType.equals("IMAGE")) {
                 i = new Intent(v.getContext(), ImageActivity.class);
-                i.putExtra("WEB_URL", (whistles.get(getPosition())).imageURL);
+                i.putExtra("ID", (whistles.get(getPosition())).id);
             } else if ((whistles.get(getPosition())).dataType.equals("AUDIO")) {
                 i = new Intent(v.getContext(), ImageActivity.class);
             }
