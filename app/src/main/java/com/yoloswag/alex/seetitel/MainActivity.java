@@ -2,14 +2,24 @@ package com.yoloswag.alex.seetitel;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,31 +27,31 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
+    private String urlBase = "http://168.235.152.38:8080/api/v1/" + "whistles";
+
+    private ProgressDialog dialog;
+    private RecyclerView recList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycle_activity_main);
-        RecyclerView recList = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("hold up");
+        dialog.setCancelable(false);
+
+        recList = (RecyclerView) findViewById(R.id.my_recycler_view);
         recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        LinearLayoutManager llm = new LinearLayoutManager(MainActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        MyAdapter ca = new MyAdapter(createList(30));
-        recList.setAdapter(ca);
+        populateWhistles(urlBase);
+
     }
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        String[] values = new String [] {"Twilight Sparkle", "Rarity", "Weh" };
-//        String[] descriptions = new String[] {"A very pretty pone", "A beautiful pone", "A strange sound" };
-//        String[] dataTypes = new String[] {"image", "text", "audio"};
-//
-//        MyArrayAdapter adapter = new MyArrayAdapter(this, values, descriptions, dataTypes);
-//        setListAdapter(adapter);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,7 +77,81 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<Whistle> createList(int size) {
+    private void populateWhistles(String Url) {
+
+        final List<Whistle> whistles = new ArrayList<Whistle>();
+        showDialog();
+
+        JsonArrayRequest request = new JsonArrayRequest(Url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+                        try {
+                            for (int i = 0; i < jsonArray.length(); ++i) {
+                                JSONObject whistle = (JSONObject) jsonArray.get(i);
+                                //do something with each whistle
+                                Whistle wh = new Whistle();
+                                if(whistle.getInt("type") == 2) {
+                                    wh.title = "Image";
+                                    wh.id = whistle.getInt("id");
+                                    wh.dataType = "IMAGE";
+                                    wh.description = "An image whistle";
+                                    wh.icon = R.drawable.noun_image;
+
+                                } else if (whistle.getInt("type") == 1) {
+                                    wh.title = "Audio";
+                                    wh.id = whistle.getInt("id");
+                                    wh.dataType = "AUDIO";
+                                    wh.description = "An audio whistle";
+                                    wh.icon = R.drawable.noun_audio;
+
+                                } else {
+                                    wh.title = "Text";
+                                    wh.id = whistle.getInt("id");
+                                    wh.dataType = "TEXT";
+                                    wh.description = whistle.getString("teaser");
+                                    wh.icon = R.drawable.noun_text;
+                                }
+                                whistles.add(wh);
+                            }
+
+                            MyAdapter ca = new MyAdapter(whistles);
+                            recList.setAdapter(ca);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        hideDialog();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                Toast.makeText(getApplicationContext(),
+                        e.getMessage(), Toast.LENGTH_SHORT).show();
+                hideDialog();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(request);
+
+    }
+
+    private void showDialog() {
+        if(!dialog.isShowing())
+            dialog.show();
+    }
+
+    private void hideDialog() {
+        if(dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+     private List<Whistle> createList(int size) {
 
         List<Whistle> result = new ArrayList<Whistle>();
         for (int i=1; i <= size; i++) {

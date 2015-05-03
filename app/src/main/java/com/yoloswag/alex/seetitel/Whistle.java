@@ -16,5 +16,5 @@ public class Whistle {
     protected String imageURL;
     protected String audioURL;
     protected String fullText;
-
+    protected int id;
 }

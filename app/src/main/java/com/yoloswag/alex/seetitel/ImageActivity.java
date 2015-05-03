@@ -58,8 +58,6 @@ public class ImageActivity extends Activity {
         wv.loadData(data, "text/html", null);
         //
 
-
-
         wv.getSettings().setBuiltInZoomControls(true);
 
         wv.loadUrl(getIntent().getExtras().getString("WEB_URL"));
