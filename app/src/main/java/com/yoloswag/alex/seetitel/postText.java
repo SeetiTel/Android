@@ -1,5 +1,6 @@
 package com.yoloswag.alex.seetitel;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -43,7 +44,11 @@ public class postText extends Activity {
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.post_text);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ActionBar ab = getActionBar();
+        ab.setTitle("Post Text Whistle");
+
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     public void send(View v) {

@@ -64,6 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
             if ((whistles.get(getPosition())).dataType.equals("TEXT")){
                 i = new Intent(v.getContext(), TextActivity.class);
                 i.putExtra("ID", (whistles.get(getPosition())).id);
+                i.putExtra("FULL_TEXT", (whistles.get(getPosition())).description);
             }
             else if ((whistles.get(getPosition())).dataType.equals("IMAGE")) {
                 i = new Intent(v.getContext(), ImageActivity.class);

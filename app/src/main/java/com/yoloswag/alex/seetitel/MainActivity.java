@@ -51,6 +51,15 @@ public class MainActivity extends Activity {
         recList.setLayoutManager(llm);
 
         populateWhistles(urlBase);
+
+        (findViewById(R.id.fab_add)).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent i = new Intent(view.getContext(), CameraActivity.class);
+                view.getContext().startActivity(i);
+                return true;
+            }
+        });
     }
 
 
@@ -70,10 +79,11 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.add) {
-//            Toast.makeText(getApplicationContext(), "adding!", Toast.LENGTH_LONG).show();
-//            return true;
-//        }
+           if (id == R.id.refresh) {
+               populateWhistles(urlBase);
+//            Toast.makeText(getApplicationContext(), "refresh...", Toast.LENGTH_LONG).show();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -81,8 +91,8 @@ public class MainActivity extends Activity {
     public void newText(View v) {
         Intent i = new Intent(v.getContext(), postText.class);
         v.getContext().startActivity(i);
-
     }
+
 
     private void populateWhistles(String Url) {
 
@@ -105,6 +115,7 @@ public class MainActivity extends Activity {
                                     wh.dataType = "IMAGE";
                                     wh.description = "An image whistle";
                                     wh.icon = R.drawable.noun_image;
+                                    wh.timestamp = whistle.getInt("created");
 
                                 } else if (whistle.getInt("type") == 1) {
                                     wh.title = "Audio";
@@ -112,6 +123,7 @@ public class MainActivity extends Activity {
                                     wh.dataType = "AUDIO";
                                     wh.description = "An audio whistle";
                                     wh.icon = R.drawable.noun_audio;
+                                    wh.timestamp = whistle.getInt("created");
 
                                 } else {
                                     wh.title = "Text";
@@ -119,6 +131,7 @@ public class MainActivity extends Activity {
                                     wh.dataType = "TEXT";
                                     wh.description = whistle.getString("teaser");
                                     wh.icon = R.drawable.noun_text;
+                                    wh.timestamp = whistle.getInt("created");
 
                                 }
                                 Log.i("MainActivity", "populate whistles " + "Id: " + wh.id + " " +

@@ -17,4 +17,5 @@ public class Whistle {
     protected String audioURL;
     protected String fullText;
     protected int id;
+    protected int timestamp;
 }

@@ -52,6 +52,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yoloswag.alex.seetitel.MainActivity" />
         </activity>
+        <activity
+            android:name=".CameraActivity"
+            android:parentActivityName="com.yoloswag.alex.seetitel.MainActivity">
+        </activity>
+        <activity
+            android:name=".UploadActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

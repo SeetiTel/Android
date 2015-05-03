@@ -1,5 +1,6 @@
 package com.yoloswag.alex.seetitel;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
@@ -77,7 +78,12 @@ public class ImageActivity extends Activity {
         id = getIntent().getExtras().getInt("ID");
 
         populateWebView(urlBase + id);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ActionBar ab = getActionBar();
+        ab.setTitle("Image");
+        ab.setSubtitle("An image whistle");
+
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     private void populateWebView(String Url) {

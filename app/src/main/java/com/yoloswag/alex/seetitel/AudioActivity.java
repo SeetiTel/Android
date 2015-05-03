@@ -1,5 +1,6 @@
 package com.yoloswag.alex.seetitel;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.media.AudioManager;
@@ -214,6 +215,12 @@ public class AudioActivity extends Activity implements View.OnClickListener, Vie
         id = getIntent().getExtras().getInt("ID");
 
         populateAudio(base + id);
+
+        ActionBar ab = getActionBar();
+        ab.setTitle("Audio");
+        ab.setSubtitle("An audio whistle");
+
+        ab.setDisplayHomeAsUpEnabled(true);
 
         initView();
     }

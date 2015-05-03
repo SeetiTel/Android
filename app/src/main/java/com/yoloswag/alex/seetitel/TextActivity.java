@@ -1,5 +1,6 @@
 package com.yoloswag.alex.seetitel;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -46,10 +47,14 @@ public class TextActivity extends Activity {
 
         tv = (TextView) findViewById(R.id.text_viewer);
         id = getIntent().getExtras().getInt("ID");
-//        tv.setText(getIntent().getExtras().getString("FULL_TEXT"));
+        String description = (getIntent().getExtras().getString("FULL_TEXT"));
         populateTextView(urlBase + id);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+        ActionBar ab = getActionBar();
+
+        ab.setTitle("Text");
+        ab.setSubtitle(description);
+
+        ab.setDisplayHomeAsUpEnabled(true);    }
 
     private void populateTextView(String Url) {
 
