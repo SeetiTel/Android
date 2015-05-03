@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,10 +29,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
 
     @Override
     public void onBindViewHolder(WhistleViewHolder whistle, int i) {
+        Log.i("MyAdapter", "id " +  whistles.get(i).id +"populate whistles " + "data type: " + whistles.get(i).title);
         Whistle w = whistles.get(i);
-        WhistleViewHolder.icon.setImageResource(w.icon);
-        WhistleViewHolder.title.setText(w.title);
-        WhistleViewHolder.description.setText(w.description);
+
+        whistle.icon.setImageResource(w.icon);
+        whistle.title.setText(w.title);
+        whistle.description.setText(w.description);
     }
 
     @Override
@@ -43,16 +46,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
     }
 
     public static class WhistleViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        protected static ImageView icon;
-        protected static TextView title;
-        protected static TextView description;
+        protected ImageView icon;
+        protected TextView title;
+        protected TextView description;
 
         public WhistleViewHolder(View v) {
             super(v);
-            v.setOnClickListener(this);
             icon = (ImageView) v.findViewById(R.id.icon_card);
             title = (TextView) v.findViewById(R.id.tit);
             description = (TextView) v.findViewById(R.id.desc);
+            v.setOnClickListener(this);
         }
 
         @Override
@@ -69,7 +72,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
                 i = new Intent(v.getContext(), AudioActivity.class);
                 i.putExtra("ID", (whistles.get(getPosition())).id);
             }
-
             if (i != null) {
                 v.getContext().startActivity(i);
             }

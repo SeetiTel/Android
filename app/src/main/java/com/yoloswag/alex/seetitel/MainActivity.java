@@ -3,6 +3,7 @@ package com.yoloswag.alex.seetitel;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -49,7 +51,6 @@ public class MainActivity extends Activity {
         recList.setLayoutManager(llm);
 
         populateWhistles(urlBase);
-
     }
 
 
@@ -77,9 +78,16 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void newText(View v) {
+        Intent i = new Intent(v.getContext(), postText.class);
+        v.getContext().startActivity(i);
+
+    }
+
     private void populateWhistles(String Url) {
 
         final List<Whistle> whistles = new ArrayList<Whistle>();
+
         showDialog();
 
         JsonArrayRequest request = new JsonArrayRequest(Url,
@@ -111,10 +119,19 @@ public class MainActivity extends Activity {
                                     wh.dataType = "TEXT";
                                     wh.description = whistle.getString("teaser");
                                     wh.icon = R.drawable.noun_text;
+
                                 }
-                                whistles.add(wh);
+                                Log.i("MainActivity", "populate whistles " + "Id: " + wh.id + " " +
+                                wh.description);
+                                if(!(whistles.contains(wh))) {
+                                    whistles.add(wh);
+                                }
                             }
                             //POPULATES RECYCLER VIEW AFTER THE REQUEST IS DONE!!
+                            for(int j = 0; j < 3; j++) {
+                                Log.i("MainActivity", "populate whistles " + "Id: " + whistles.get(j).id + " " +
+                                        whistles.get(j).dataType);
+                            }
                             MyAdapter ca = new MyAdapter(whistles);
                             recList.setAdapter(ca);
 
