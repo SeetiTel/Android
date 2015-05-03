@@ -1,27 +1,47 @@
 package com.yoloswag.alex.seetitel;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String[] values = new String [] {"Twilight Sparkle", "Rarity", "Weh" };
-        String[] descriptions = new String[] {"A very pretty pone", "A beautiful pone", "A strange sound" };
-        String[] dataTypes = new String[] {"image", "text", "audio"};
+        setContentView(R.layout.recycle_activity_main);
+        RecyclerView recList = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
 
-        MyArrayAdapter adapter = new MyArrayAdapter(this, values, descriptions, dataTypes);
-        setListAdapter(adapter);
+        MyAdapter ca = new MyAdapter(createList(30));
+        recList.setAdapter(ca);
     }
+
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        String[] values = new String [] {"Twilight Sparkle", "Rarity", "Weh" };
+//        String[] descriptions = new String[] {"A very pretty pone", "A beautiful pone", "A strange sound" };
+//        String[] dataTypes = new String[] {"image", "text", "audio"};
+//
+//        MyArrayAdapter adapter = new MyArrayAdapter(this, values, descriptions, dataTypes);
+//        setListAdapter(adapter);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,5 +65,21 @@ public class MainActivity extends ListActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private List<Whistle> createList(int size) {
+
+        List<Whistle> result = new ArrayList<Whistle>();
+        for (int i=1; i <= size; i++) {
+            Whistle ci = new Whistle();
+            ci.title = "PonyPony";
+            ci.description = "Horse!";
+            ci.icon = R.drawable.noun_image;
+
+            result.add(ci);
+
+        }
+
+        return result;
     }
 }
