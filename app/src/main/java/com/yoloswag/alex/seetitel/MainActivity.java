@@ -69,10 +69,10 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.add) {
-            Toast.makeText(getApplicationContext(), "adding!", Toast.LENGTH_LONG).show();
-            return true;
-        }
+//        if (id == R.id.add) {
+//            Toast.makeText(getApplicationContext(), "adding!", Toast.LENGTH_LONG).show();
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
                                 }
                                 whistles.add(wh);
                             }
-
+                            //POPULATES RECYCLER VIEW AFTER THE REQUEST IS DONE!!
                             MyAdapter ca = new MyAdapter(whistles);
                             recList.setAdapter(ca);
 
