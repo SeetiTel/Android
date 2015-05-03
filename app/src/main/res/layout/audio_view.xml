@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical" android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:weightSum="1">-->
 
 
-    <Button
-        android:layout_width="wrap_content"
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="toggle play"-->
+        <!--android:id="@+id/button1"-->
+        <!--android:layout_gravity="center_horizontal" />-->
+
+<!--</LinearLayout>-->
+<RelativeLayout
+    android:id="@+id/widget31"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageButton
+        android:id="@+id/ButtonTestPlayPause"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toggle play"
-        android:id="@+id/button1"
-        android:layout_gravity="center_horizontal" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="TestPlayPause"
+        android:onClick="onClick"
+        android:src="@drawable/noun_play" />
 
-</LinearLayout>
+    <SeekBar
+        android:id="@+id/SeekBarTestPlay"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ButtonTestPlayPause" />
+
+</RelativeLayout>

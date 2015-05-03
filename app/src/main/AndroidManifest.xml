@@ -21,6 +21,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".AudioActivity"
+            android:label="AudioActivity"
+            android:parentActivityName="com.yoloswag.alex.seetitel.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yoloswag.alex.seetitel.MainActivity" />
+        </activity>
+        <activity
             android:name=".TextActivity"
             android:label="TextActivity"
             android:parentActivityName="com.yoloswag.alex.seetitel.MainActivity" >
