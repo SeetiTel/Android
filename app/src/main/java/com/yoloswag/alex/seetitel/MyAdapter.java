@@ -57,9 +57,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WhistleViewHolder>
 
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(v.getContext(), TextActivity.class);
-            i.putExtra("FULL_TEXT", (whistles.get(getPosition())).fullText);
-            v.getContext().startActivity(i);
+            Intent i = null;
+            if ((whistles.get(getPosition())).dataType.equals("TEXT")){
+                i = new Intent(v.getContext(), TextActivity.class);
+                i.putExtra("FULL_TEXT", (whistles.get(getPosition())).fullText);
+            }
+            else if ((whistles.get(getPosition())).dataType.equals("IMAGE")) {
+                i = new Intent(v.getContext(), ImageActivity.class);
+                i.putExtra("WEB_URL", (whistles.get(getPosition())).imageURL);
+            }
+
+            if (i != null) {
+                v.getContext().startActivity(i);
+            }
             //Toast.makeText(v.getContext(), ((TextView) v.findViewById(R.id.tit)).getText().toString(),Toast.LENGTH_LONG).show();
         }
     }

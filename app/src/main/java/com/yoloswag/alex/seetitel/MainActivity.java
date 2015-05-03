@@ -79,6 +79,8 @@ public class MainActivity extends Activity {
                     "THIS IS JUST SOME TEST TEXT AND I DONT REALLY FEEL LIKE GETTING THE WHOLE LATIN THING" +
                     "BECAUSE I'M LAZY OR SOMETHING HOPEFULLY THIS IS A GOOD ENOUGH LENGTH TO TEST A TEXTVIEW" +
                     " HOLA";
+            ci.dataType = "IMAGE";
+            ci.imageURL = "http://i.imgur.com/A4wsrH1.jpg";
 
             result.add(ci);
 
