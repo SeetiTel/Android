@@ -55,7 +55,7 @@ public class postText extends Activity {
 
         message = ((EditText) findViewById(R.id.editText)).getText().toString();
 
-        if(message.matches(".*\\w.*")) {
+//        if(message.matches(".*\\w.*")) {
 
             postString("http://168.235.152.38:8080/api/v1/whistle/new");
 
@@ -63,7 +63,7 @@ public class postText extends Activity {
 
             Toast.makeText(v.getContext(), "Message has been posted!",
                     Toast.LENGTH_LONG).show();
-        }
+       // }
     }
 
 public void postString(String url) {
